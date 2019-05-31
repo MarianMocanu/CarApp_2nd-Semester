@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Edit car</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<div th:replace="navbar"></div>
+
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Edit Car</h1>
+        <p class="lead">
+        <form th:action="'/editCar/' + ${carModel.carId}" th:object="${carModel}" method="post">
+            <input type="hidden" id="carId" th:value="${carModel.carId}">
+            <div class="form-group">
+                <label for="reg">Registration number</label>
+                <input type="text" class="form-control" id="reg" name="reg" th:value="${carModel.reg}">
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand" th:value="${carModel.brand}">
+            </div>
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" class="form-control" id="color" name="color" th:value="${carModel.color}">
+            </div>
+            <div class="form-group">
+                <label for="maxSpeed">Maximum Speed</label>
+                <input type="text" class="form-control" id="maxSpeed" name="maxSpeed" th:value="${carModel.maxSpeed}">
+            </div>
+            <div class="form-group">
+                <label for="owners">Owners</label>
+                <select class="custom-select" multiple size="5" name="owners" id="owners" th:field="${carModel.owners}">
+                    <option th:each="owner:${ownerList}" th:value="${owner.id}" th:text="${owner.toString()}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </p>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
